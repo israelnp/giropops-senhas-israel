@@ -3,14 +3,14 @@ entries:
   giropops-senhas:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2024-10-07T15:45:23.759594413-03:00"
+    created: "2024-10-07T15:59:54.794243294-03:00"
     description: Esse é o chart do Giropops-Senhas, utilizados nos laboratórios de
       Kubernetes.
-    digest: f31b1ec5b5ace5ebc6dbd74c8745d4b6ad9e05a3ceaf3785351fdce117c90573
+    digest: 10170b77246de97c711f2b1671c3149c8eb5dcc1b7759ce8b9f680642d679e58
     name: giropops-senhas
     sources:
     - https://github.com/israelnp/giropops-senhas-israel.git
     urls:
     - https://israelnp.github.io/giropops-senhas-israel/giropops-senhas-0.1.0.tgz
     version: 0.1.0
-generated: "2024-10-07T15:45:23.758649852-03:00"
+generated: "2024-10-07T15:59:54.79311588-03:00"
