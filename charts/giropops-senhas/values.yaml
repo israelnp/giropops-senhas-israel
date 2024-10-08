@@ -41,8 +41,7 @@ services:
       - port: 5000
         targetPort: 5000
         name: "giropops-senhas-app"
-        serviceType: NodePort
-        NodePort: 32500
+        serviceType: ClusterIP
       - port: 8088
         targetPort: 8088
         name: "giropops-senhas-metrics"
