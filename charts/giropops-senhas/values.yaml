@@ -71,7 +71,7 @@ services:
         name: "giropops-senhas-metrics"
         serviceType: ClusterIP
     labels:
-      app: "giropops-senhas"
+      app: "giropops-senhas-canary"
       env: "labs"
       live: "true"
   redis-canary:
@@ -81,7 +81,7 @@ services:
         name: "service"
         serviceType: ClusterIP
     labels:
-      app: "redis"
+      app: "redis-canary"
       env: "labs"
       live: "true"
 observability:
