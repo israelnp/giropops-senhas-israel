@@ -18,9 +18,6 @@ spec:
         - setWeight: 50
         - pause: {duration: 60s}
         - setWeight: 100
-    selector:
-      matchLabels:
-        app: {{ $component }}
   template:
     metadata:
       labels:

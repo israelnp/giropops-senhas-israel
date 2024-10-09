@@ -11,6 +11,6 @@ entries:
     sources:
     - https://github.com/israelnp/giropops-senhas-israel.git
     urls:
-    - https://israelnp.github.io/giropops-senhas-israel/giropops-senhas-0.2.5.tgz
-    version: 0.2.5
+    - https://israelnp.github.io/giropops-senhas-israel/giropops-senhas-0.2.6.tgz
+    version: 0.2.6
 generated: "2024-10-07T15:59:54.79311588-03:00"

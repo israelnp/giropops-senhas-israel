@@ -1,7 +1,7 @@
 apiVersion: v2
 name: giropops-senhas
 description: Esse é o chart do Giropops-Senhas, utilizados nos laboratórios de Kubernetes.
-version: 0.2.5
-appVersion: 0.2.5
+version: 0.2.6
+appVersion: 0.2.6
 sources:
   - https://github.com/israelnp/giropops-senhas-israel.git
