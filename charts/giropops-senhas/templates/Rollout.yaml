@@ -12,24 +12,15 @@ spec:
       app: {{ $config.labels.app }}
   strategy:
     canary:
-      analysis:
-        templates:
-        - templateName: {{ $component }}
-        startingStep: 2
-      canaryService: {{ $component }}-canary
-      stableService: {{ $component }}
-      trafficRouting:
-        nginx:
-          stableIngress: {{ $component }}
       steps:
-      - setWeight: 20
-      - pause: {duration: 30s}
-      - setWeight: 40
-      - pause: {duration: 1m}
-      - setWeight: 60
-      - pause: {duration: 1m}
-      - setWeight: 80
-      - pause: {duration: 2m}
+        - setWeight: 20
+        - pause: {duration: 30s}
+        - setWeight: 50
+        - pause: {duration: 60s}
+        - setWeight: 100
+    selector:
+      matchLabels:
+        app: {{ $component }}-canary
   template:
     metadata:
       labels:
