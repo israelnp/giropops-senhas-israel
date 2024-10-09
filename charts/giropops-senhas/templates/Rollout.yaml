@@ -1,0 +1,53 @@
+{{- range $component, $config := .Values.deployments }}
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: {{ $component }}
+  labels:
+    {{- include "app.labels" $config | nindent 4 }}
+spec:
+  replicas: {{ $config.replicas }}
+  selector:
+    matchLabels:
+      app: {{ $component }}
+  strategy:
+    canary:
+      analysis:
+        templates:
+        - templateName: {{ $component }}
+        startingStep: 2
+      canaryService: {{ $component }}-canary
+      stableService: {{ $component }}
+      trafficRouting:
+        nginx:
+          stableIngress: {{ $component }}
+      steps:
+      - setWeight: 20
+      - pause: {duration: 30s}
+      - setWeight: 40
+      - pause: {duration: 1m}
+      - setWeight: 60
+      - pause: {duration: 1m}
+      - setWeight: 80
+      - pause: {duration: 2m}
+  template:
+    metadata:
+      labels:
+        {{- include "app.labels" $config | nindent 8 }}
+    spec:
+      containers:
+        - image: {{ $config.image }}
+          name: {{ $component }}
+          ports:
+          {{- include "app.ports" $config | nindent 10 }}
+          resources:
+          {{- include "app.resources" $config | nindent 12 }}
+{{- if $config.env }}
+        env:
+        {{- range $config.env }}
+        - name: {{ .name }}
+          value: {{ .value }}
+        {{- end }}
+{{- end }}
+---
+{{- end }}
