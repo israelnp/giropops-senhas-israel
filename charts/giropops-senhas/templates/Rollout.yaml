@@ -1,41 +1,40 @@
-{{- range $component, $config := .Values.deployments }}
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: {{ $component }}
-  labels:
-    {{- include "app.labels" $config | nindent 4 }}
+  name: {{ .Release.Name }}
 spec:
-  replicas: {{ $config.replicas | default 3 }}
+  replicas: {{ .Values.helloWorld.replicas }}
   selector:
     matchLabels:
-      app: {{ $config.labels.app }}
+      app: {{ .Release.Name }}
   strategy:
     canary:
+      analysis:
+        templates:
+        - templateName: {{ .Release.Name }}
+        startingStep: 2
+      canaryService: {{ .Release.Name }}-canary
+      stableService: {{ .Release.Name }}
+      trafficRouting:
+        nginx:
+          stableIngress: {{ .Release.Name }}
       steps:
-        - setWeight: 20
-        - pause: {duration: 30s}
-        - setWeight: 50
-        - pause: {duration: 60s}
-        - setWeight: 100
+      - setWeight: 20
+      - pause: {duration: 30s}
+      - setWeight: 40
+      - pause: {duration: 1m}
+      - setWeight: 60
+      - pause: {duration: 1m}
+      - setWeight: 80
+      - pause: {duration: 2m}
   template:
     metadata:
       labels:
-        {{- include "app.labels" $config | nindent 8 }}
+        app: {{ .Release.Name }}
     spec:
       containers:
-        - image: {{ $config.image }}
-          name: {{ $component }}
+        - image: {{ .Values.helloWorld.image }}
+          name: {{ .Release.Name }}
           ports:
-          {{- include "app.ports" $config | nindent 10 }}
-          resources:
-          {{- include "app.resources" $config | nindent 12 }}
-{{- if $config.env }}
-        env:
-        {{- range $config.env }}
-        - name: {{ .name }}
-          value: {{ .value }}
-        {{- end }}
-{{- end }}
----
-{{- end }}
+            - containerPort: {{ .Values.helloWorld.port }}
+          imagePullPolicy: {{ .Values.helloWorld.imagePullPolicy }}
