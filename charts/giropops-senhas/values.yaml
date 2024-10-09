@@ -64,11 +64,11 @@ services:
     ports:
       - port: 5000
         targetPort: 5000
-        name: "giropops-senhas-app"
+        name: "giropops-senhas-app-canary"
         serviceType: ClusterIP
       - port: 8088
         targetPort: 8088
-        name: "giropops-senhas-metrics"
+        name: "giropops-senhas-metrics-canary"
         serviceType: ClusterIP
     labels:
       app: "giropops-senhas-canary"
@@ -78,7 +78,7 @@ services:
     ports:
       - port: 6379
         targetPort: 6379  # Corrigido para 6379
-        name: "service"
+        name: "service-canary"
         serviceType: ClusterIP
     labels:
       app: "redis-canary"
