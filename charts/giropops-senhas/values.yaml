@@ -60,30 +60,6 @@ services:
       app: "redis"
       env: "labs"
       live: "true"
-  giropops-senhas-canary:
-    ports:
-      - port: 5000
-        targetPort: 5000
-        name: "giropops-senhas-app-canary"
-        serviceType: ClusterIP
-      - port: 8088
-        targetPort: 8088
-        name: "giropops-senhas-metrics-canary"
-        serviceType: ClusterIP
-    labels:
-      app: "giropops-senhas-canary"
-      env: "labs"
-      live: "true"
-  redis-canary:
-    ports:
-      - port: 6379
-        targetPort: 6379  # Corrigido para 6379
-        name: "service-canary"
-        serviceType: ClusterIP
-    labels:
-      app: "redis-canary"
-      env: "labs"
-      live: "true"
 observability:
   giropops-senhas:
     logging: true

@@ -20,7 +20,7 @@ spec:
         - setWeight: 100
     selector:
       matchLabels:
-        app: {{ $component }}-canary
+        app: {{ $component }}
   template:
     metadata:
       labels:
