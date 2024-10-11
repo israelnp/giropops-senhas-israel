@@ -9,6 +9,15 @@ spec:
       app: {{ .Release.Name }}
   strategy:
     canary:
+      analysis:
+        templates:
+        - templateName: {{ .Release.Name }}
+        startingStep: 2
+      canaryService: {{ .Release.Name }}-canary
+      stableService: {{ .Release.Name }}
+      trafficRouting:
+        nginx:
+          stableIngress: {{ .Release.Name }}
       steps:
       - setWeight: 20
       - pause: {duration: 30s}
