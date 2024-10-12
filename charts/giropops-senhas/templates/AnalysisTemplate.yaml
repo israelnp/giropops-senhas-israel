@@ -15,6 +15,6 @@ spec:
         # timeout is expressed in seconds
         timeout: 10
         query: |
-          rate(nginx_ingress_controller_requests{ingress="helloworld", status="200"}[1m])
+          sum(irate(nginx_ingress_controller_requests{ingress="{{ .Release.Name }}", status="5.*"}[1m]))
           / 
-          rate(nginx_ingress_controller_requests{ingress="helloworld"}[1m])
+          sum(irate(nginx_ingress_controller_requests{ingress="{{ .Release.Name }}" }[1m]))
