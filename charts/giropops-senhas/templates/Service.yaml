@@ -3,7 +3,7 @@ kind: Service
 metadata:
   labels:
     app: {{ .Release.Name }}
-  name: {{ .Release.Name }}-canary
+  name: {{ .Release.Name }}
 spec:
   ports:
   - port: {{ .Values.helloWorld.port }}
